@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: var(--color-scheme, dark);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    overflow: hidden;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-lg 
+           transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary-hover text-foreground px-4 py-2 rounded-lg 
+           transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-secondary/20;
+  }
+
+  .input {
+    @apply bg-card text-foreground px-3 py-2 rounded-lg border border-border 
+           focus:outline-none focus:ring-2 focus:ring-primary 
+           transition-all duration-300 ease-in-out;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-lg bg-white/10 border border-white/20;
+  }
+
+  .hover-glow {
+    @apply hover:shadow-lg hover:shadow-primary/20 transition-shadow duration-300;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(var(--primary-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Custom Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.4s ease-out;
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.4s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--primary-rgb), 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Transition Classes */
+.page-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.hover-transform {
+  @apply transition-transform duration-300 ease-in-out hover:scale-105;
+}
+
+.hover-lift {
+  @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
+}
+
+.popup-overlay {
+  @apply fixed inset-0 bg-black/50 backdrop-blur-sm 
+         transition-opacity duration-300 ease-in-out;
+}
+
+.popup-content {
+  @apply transform transition-all duration-300 ease-out;
+}
+
+/* Game Grid Animation Delays */
+.game-grid > * {
+  animation: scaleIn 0.5s ease-out backwards;
+}
+
+@for $i from 1 through 20 {
+  .game-grid > *:nth-child(#{$i}) {
+    animation-delay: calc(#{$i} * 50ms);
+  }
+}
+
+/* Glass Morphism */
+.glass {
+  @apply backdrop-blur-md bg-white/10 border border-white/20;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+}
+
+/* Hover Effects */
+.hover-glow-border {
+  @apply transition-all duration-300;
+  box-shadow: 0 0 0 0 var(--primary);
+}
+
+.hover-glow-border:hover {
+  box-shadow: 0 0 20px -5px var(--primary);
+}
+
+/* Loading Shimmer Effect */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--primary-rgb), 0.05),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
